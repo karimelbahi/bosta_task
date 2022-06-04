@@ -1,9 +1,11 @@
 package com.example.task.presentation.utils
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -42,7 +44,6 @@ fun ImageView.loadImage(
     placeholderDrawable: Drawable? = null,
     progressBar: ProgressBar?
 ) {
-
     val theImage = GlideUrl(
         imageUrl, LazyHeaders.Builder()
             .addHeader("User-Agent", "5")
@@ -76,6 +77,10 @@ fun ImageView.loadImage(
                 return false
             }
         }).into(this)
+}
+
+fun Context.toast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
 

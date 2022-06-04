@@ -17,7 +17,6 @@ import com.example.task.presentation.utils.invisible
 import com.example.task.presentation.utils.snack
 import com.example.task.presentation.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile), OnItemClickListener<Album> {
