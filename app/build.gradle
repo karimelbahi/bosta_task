@@ -70,6 +70,7 @@ dependencies {
     implementation Libs.material
     implementation Libs.constraintLayout
     implementation Libs.legacySupport
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation TestLibs.junit
     androidTestImplementation TestLibs.junitExt
     androidTestImplementation TestLibs.espresso
