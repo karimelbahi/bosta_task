@@ -1,7 +1,11 @@
 package com.example.task.presentation.ui.albumdetails
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -12,11 +16,9 @@ import com.example.task.R
 import com.example.task.databinding.FragmentAlbumDetailsBinding
 import com.example.task.domain.entity.AlbumPhoto
 import com.example.task.interfaces.OnItemClickListener
-import com.example.task.presentation.utils.Status
-import com.example.task.presentation.utils.invisible
-import com.example.task.presentation.utils.snack
-import com.example.task.presentation.utils.visible
+import com.example.task.presentation.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.search_group.*
 
 @AndroidEntryPoint
 class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
@@ -49,10 +51,31 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
                 adapter = albumPhotosListAdapter
                 layoutManager = GridLayoutManager(activity, 3)
                 itemAnimator = null
-                addItemDecoration(
-                    DividerItemDecoration(activity, LinearLayoutManager.VERTICAL)
-                )
             }
+
+            search_field.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    viewModel.filterAlbumPhotos(p0.toString())
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+
+                }
+
+            })
+
+            search_field.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    viewModel.filterAlbumPhotos(search_field.text.toString())
+                    return@OnEditorActionListener true
+                }
+                false
+            })
+
         }
 
 
@@ -75,13 +98,19 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
                     binding.albumName.visible()
                     binding.progressCircular.invisible()
                     users.data?.let {
-                        if (it.isNullOrEmpty())
+                        if (it.isNullOrEmpty() && viewModel.emptyFilterMessage.value.isNullOrEmpty())
                             showSnackBar(getString(R.string.no_album_photos_for_user))
-                        else {
-                            albumPhotosListAdapter.submitList(it)
-                        }
+                        albumPhotosListAdapter.submitList(it)
+                        albumPhotosListAdapter.notifyDataSetChanged()
+
                     }
                 }
+            }
+        }
+
+        viewModel.emptyFilterMessage.observe(viewLifecycleOwner) { msg ->
+            if (!msg.isNullOrEmpty()) {
+                showToast(msg)
             }
         }
     }
@@ -92,6 +121,10 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
 
     private fun showSnackBar(message: String) {
         binding.main.snack(message) {}
+    }
+
+    private fun showToast(message: String) {
+        requireActivity().toast(message)
     }
 
     override fun onDestroy() {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">task</string>
+    <string name="app_name">Bosta</string>
 
     <string name="msg_unknown_error">Unknown Error Occurred.</string>
     <string name="msg_auth_error">Authentication error, please re-login.</string>
@@ -12,4 +12,6 @@
     <string name="search_in_images">Search in images..</string>
     <string name="profile">Profile</string>
     <string name="search">Search</string>
+    <string name="empty_filter_album_msg">Sorry, there are no data</string>
+
 </resources>

@@ -30,7 +30,7 @@ class UserMapperImpl @Inject constructor() : UserMapper {
     override fun mapAlbumPhotosToViewState(albumPhotoResponse: List<AlbumPhotoResponse>): List<AlbumPhoto> {
         return albumPhotoResponse.map {
             with(it) {
-                AlbumPhoto(id, url)
+                AlbumPhoto(id, url,title)
             }
         }
     }
