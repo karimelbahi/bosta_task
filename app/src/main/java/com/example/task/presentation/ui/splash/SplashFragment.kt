@@ -1,11 +1,16 @@
 package com.example.task.presentation.ui.splash
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.task.R
 import com.example.task.databinding.FragmentSplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private var _binding: FragmentSplashBinding? = null
@@ -16,16 +21,19 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         _binding = FragmentSplashBinding.bind(view)
 
         setUpViews()
-        setObservers()
-
     }
 
 
     private fun setUpViews() {
-
-    }
-
-    private fun setObservers() {
+       requireActivity(). window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+        Handler().postDelayed({
+            findNavController().navigate(
+                SplashFragmentDirections.actionNavigationSplashToProfileFragment()
+            )
+        }, 1000)
 
     }
 
