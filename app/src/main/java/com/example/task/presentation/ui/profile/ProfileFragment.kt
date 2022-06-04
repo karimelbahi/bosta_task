@@ -1,14 +1,16 @@
 package com.example.task.presentation.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.task.R
 import com.example.task.databinding.FragmentProfileBinding
+import com.example.task.domain.entity.Album
+import com.example.task.interfaces.OnItemClickListener
 import com.example.task.presentation.ui.home.adapter.AlbumsListAdapter
 import com.example.task.presentation.utils.Status
 import com.example.task.presentation.utils.invisible
@@ -18,16 +20,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ProfileFragment : Fragment(R.layout.fragment_profile), OnItemClickListener<Album> {
 
     private val viewModel: ProfileViewModel by viewModels()
-
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-
-    @Inject
-    lateinit var albumsListAdapter: AlbumsListAdapter
-
+    private val albumsListAdapter by lazy {
+        AlbumsListAdapter(this@ProfileFragment)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,7 +35,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         setUpViews()
         setObservers()
-
     }
 
 
@@ -94,12 +93,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     }
                 }
                 Status.SUCCESS -> {
-                    binding.albumsLabel.visible()
                     binding.progressCircular.invisible()
                     users.data?.let {
                         if (it.isNullOrEmpty())
                             showSnackBar(getString(R.string.no_albums_for_user))
                         else {
+                            binding.albumsLabel.visible()
                             albumsListAdapter.submitList(it)
                         }
                     }
@@ -108,14 +107,23 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
+    override fun onItemClicked(item: Album) {
+        findNavController().navigate(
+            ProfileFragmentDirections.actionProfileFragmentToAlbumDetailsFragment(
+                item.title, item.id
+            )
+        )
+    }
+
     private fun showSnackBar(message: String) {
         binding.main.snack(message) {}
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
+
 }
 

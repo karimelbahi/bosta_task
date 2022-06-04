@@ -1,8 +1,6 @@
 package com.example.task.presentation.ui.profile
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.task.data.api.model.AlbumResponse
 import com.example.task.domain.entity.Album
 import com.example.task.domain.entity.User
 import com.example.task.domain.usecases.freshproducs.UsersUseCase
@@ -34,10 +32,10 @@ class ProfileViewModel @Inject constructor(
     fun getUserDetails() {
         viewModelScope.launch(Dispatchers.IO) {
             _users.postValue(Resource.loading())
-            val test = async { usersUseCase.getUser(_randomUser).first() }
-            val test2 = async { usersUseCase.getUserAlbums(_randomUser).first() }
-            _users.postValue(test.await() as Resource<User>)
-            _usersAlbums.postValue(test2.await() as Resource<List<Album>>)
+            val userInfoAsync = async { usersUseCase.getUser(_randomUser).first() }
+            val userAlbumsAsync = async { usersUseCase.getUserAlbums(_randomUser).first() }
+            _users.postValue(userInfoAsync.await() as Resource<User>)
+            _usersAlbums.postValue(userAlbumsAsync.await() as Resource<List<Album>>)
         }
     }
 }

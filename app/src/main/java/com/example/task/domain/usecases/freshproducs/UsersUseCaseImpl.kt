@@ -19,5 +19,9 @@ class UsersUseCaseImpl @Inject constructor(
         return repository.getUserAlbums(userId)
     }
 
+    override fun getAlbumPhotos(albumId: Int): Flow<Resource<*>> {
+        return repository.getAlbumPhotos(albumId)
+    }
+
 
 }

@@ -8,5 +8,6 @@ interface UsersUseCase {
 
     fun getUser(userId: Int): Flow<Resource<*>>
     fun getUserAlbums(userId: Int): Flow<Resource<*>>
+    fun getAlbumPhotos(albumId: Int): Flow<Resource<*>>
 
 }
