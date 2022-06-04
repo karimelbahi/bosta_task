@@ -13,6 +13,8 @@ interface WebService {
     @GET("albums")
     suspend fun getUserAlbums(@Query("userId") userId: Int):  List<AlbumResponse>
 
+    @GET("photos")
+    suspend fun getAlbumPhotos(@Query("albumId") albumId: Int):  List<PhotoResponse>
 
     @GET("users/{id}")
     suspend fun getUser(@Path("id") userId: Int): UserResponse

@@ -10,4 +10,5 @@
     <string name="no_albums_for_user">there are no Albums for this user</string>
     <string name="search_in_images">Search in images..</string>
     <string name="profile">Profile</string>
+    <string name="search">Search</string>
 </resources>
