@@ -1,0 +1,152 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId Android.applicationId
+        minSdkVersion Android.minSDK
+        targetSdkVersion Android.targetSDK
+        versionCode Android.versionCode
+        versionName Android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    viewBinding {
+        enabled = true
+
+    }
+    defaultConfig {
+        // Enabling multidex support.
+        multiDexEnabled true
+
+    }
+
+}
+
+
+// to solve Expected @AndroidEntryPoint to have a value. Did you forget to apply the Gradle Plugin?
+
+kapt {
+    javacOptions {
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
+}
+
+
+kapt {
+    correctErrorTypes true
+}
+dependencies {
+
+
+    // design
+    implementation Libs.coreExt
+    implementation Libs.appCompat
+    implementation Libs.material
+    implementation Libs.constraintLayout
+    implementation Libs.legacySupport
+    testImplementation TestLibs.junit
+    androidTestImplementation TestLibs.junitExt
+    androidTestImplementation TestLibs.espresso
+
+
+    //support multidex
+    implementation Libs.multidex
+
+    // design
+    implementation Libs.sdp
+    implementation Libs.ssp
+    implementation Libs.recyclerview
+
+
+    // coroutines
+    implementation Libs.coroutines
+
+    // view model
+    implementation Libs.lifecycleViewModel
+    implementation Libs.lifecycleRuntime
+
+    //ViewModel & Lifecycle
+    implementation Libs.lifecycleLivedata
+
+    implementation Libs.activityKtx
+    implementation Libs.kotlinStdLib
+
+    // nav lib
+    implementation Libs.navigationRuntime
+    implementation Libs.navigationFragment
+    implementation Libs.navigationUi
+
+    //Dagger hilt
+    implementation Libs.hiltAndroid
+    kapt Libs.hiltAndroidCompiler
+
+    // timber
+    implementation Libs.timber
+
+    //Network
+    implementation Libs.retrofit
+    implementation Libs.gsonConverter
+    implementation Libs.loggingInterceptor
+
+    // gson
+    implementation(Libs.gson)
+
+    // glide
+    implementation Libs.glide
+
+    // local unit testing
+    testImplementation TestLibs.googleTruth
+
+    // for InstantTaskExecutorRule
+    testImplementation TestLibs.archCoreTesting
+    testImplementation TestLibs.coroutinesTest
+
+    testImplementation TestLibs.mockito
+    testImplementation TestLibs.powermockCore
+    testImplementation TestLibs.powermockModuleTestng
+    testImplementation TestLibs.powermockApiMockito2
+    testImplementation TestLibs.mockitoCore
+    testImplementation TestLibs.mockitoKotlin2
+    testImplementation TestLibs.powermockInline
+
+    // Instrumented Unit Tests
+    androidTestImplementation TestLibs.archCoreTesting
+    androidTestImplementation TestLibs.coroutinesTest
+
+    kaptAndroidTest TestLibs.kaptAndroidTest
+    androidTestImplementation TestLibs.hiltAndroidTest
+    annotationProcessor TestLibs.kaptAndroidTest
+
+    implementation Libs.fragmentKtx
+    debugImplementation Libs.debugImplementation
+
+
+}
+
+
