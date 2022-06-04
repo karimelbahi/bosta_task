@@ -8,11 +8,18 @@
     <fragment
         android:id="@+id/navigation_splash"
         android:name="com.example.task.presentation.ui.splash.SplashFragment"
-        android:label="Fresh Products"
+        android:label="Profile"
         tools:layout="@layout/fragment_splash">
 
+        <action
+            android:id="@+id/action_navigation_splash_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.task.presentation.ui.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
 
 
 </navigation>
