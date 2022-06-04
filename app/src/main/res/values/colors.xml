@@ -6,6 +6,8 @@
     <color name="colorOnPrimary">#adbbc4</color>
     <color name="colorAccent">#000000</color>
     <color name="gray">#F322272B</color>
+    <color name="light_gray">#6122272B</color>
+    <color name="white">#EEEEEE</color>
     <color name="yellow">#B17600</color>
     <color name="black">#FF000000</color>
 </resources>

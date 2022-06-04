@@ -1,7 +1,7 @@
 package com.example.task.data.api.model
 import com.google.gson.annotations.SerializedName
 
-data class PhotoResponse (
+data class AlbumPhotoResponse (
     @SerializedName("albumId") val albumId: Int,
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,

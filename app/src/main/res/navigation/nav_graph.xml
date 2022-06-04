@@ -10,16 +10,35 @@
         android:name="com.example.task.presentation.ui.splash.SplashFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_splash">
-
         <action
             android:id="@+id/action_navigation_splash_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.task.presentation.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumDetailsFragment"
+        android:name="com.example.task.presentation.ui.albumdetails.AlbumDetailsFragment"
+        android:label="AlbumDetailsFragment"
+        tools:layout="@layout/fragment_album_details">
+        <argument
+            android:name="albumTitle"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="albumId"
+            app:argType="integer"
+            app:nullable="false" />
+    </fragment>
 
 
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.task.data.repo
 
+import com.example.task.data.api.model.AlbumPhotoResponse
 import com.example.task.data.api.model.AlbumResponse
 import com.example.task.data.api.model.UserResponse
 import com.example.task.data.api.retrofit.WebService
@@ -33,6 +34,14 @@ class UsersRepoImpl @Inject constructor(
     }.map {
         if (it.status.get() == Status.SUCCESS) {
             Resource.success(userMapper.mapAlbumToViewState(it.data as List<AlbumResponse>))
+        } else it
+    }
+
+    override fun getAlbumPhotos(albumId: Int) = loadFromApi {
+        (webService::getAlbumPhotos)(albumId)
+    }.map {
+        if (it.status.get() == Status.SUCCESS) {
+            Resource.success(userMapper.mapAlbumPhotosToViewState(it.data as List<AlbumPhotoResponse>))
         } else it
     }
 
