@@ -30,7 +30,7 @@ class AlbumDetailsViewModel @Inject constructor(
     private var _filteredPhotos = ArrayList<AlbumPhoto>()
 
     private val _emptyFilterMessage = MutableLiveData<String?>()
-    val emptyFilterMessage = _emptyFilterMessage as LiveData<*>
+    val emptyFilterMessage = _emptyFilterMessage as LiveData<String>
 
     fun getUserDetails(albumId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
