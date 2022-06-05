@@ -11,3 +11,22 @@ data class UserResponse (
 	@SerializedName("website") val website : String,
 	@SerializedName("company") val company : Company
 )
+
+data class Address(
+	@SerializedName("street") val street: String,
+	@SerializedName("suite") val suite: String,
+	@SerializedName("city") val city: String,
+	@SerializedName("zipcode") val zipcode: String,
+	@SerializedName("geo") val geo: Geo
+)
+
+data class Geo (
+	@SerializedName("lat") val lat : Double,
+	@SerializedName("lng") val lng : Double
+)
+
+data class Company (
+	@SerializedName("name") val name : String,
+	@SerializedName("catchPhrase") val catchPhrase : String,
+	@SerializedName("bs") val bs : String
+)
