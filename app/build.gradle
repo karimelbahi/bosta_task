@@ -121,6 +121,9 @@ dependencies {
     // glide
     implementation Libs.glide
 
+    // zoomImg
+    implementation Libs.zoomImg
+
     // local unit testing
     testImplementation TestLibs.googleTruth
 

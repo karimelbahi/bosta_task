@@ -34,6 +34,9 @@ class AlbumPhotosListAdapter constructor(private val onItemClickListener: OnItem
             binding.apply {
                 with(albumPhoto) {
                     albumImg.loadImage(url, null, progress)
+                    albumImg.setOnClickListener {
+                        onItemClickListener.onItemClicked(albumPhoto)
+                    }
                 }
             }
         }
