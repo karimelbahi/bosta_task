@@ -13,5 +13,6 @@
     <string name="profile">Profile</string>
     <string name="search">Search</string>
     <string name="empty_filter_album_msg">Sorry, there are no data</string>
+    <string name="recommendation_msg">"\nLet me recommend you this Image\n\n"</string>
 
 </resources>
