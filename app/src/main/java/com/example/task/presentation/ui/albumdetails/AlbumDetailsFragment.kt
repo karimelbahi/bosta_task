@@ -18,6 +18,7 @@ import com.example.task.interfaces.OnItemClickListener
 import com.example.task.presentation.ui.profile.ProfileFragmentDirections
 import com.example.task.presentation.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.search_group.*
 
 @AndroidEntryPoint
@@ -91,6 +92,8 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
                 Status.ERROR -> {
                     binding.progressCircular.invisible()
                     users.msg?.let {
+                        if (it == getString(R.string.msg_network_error))
+                            no_internet_layout.visible()
                         showSnackBar(it)
                     }
                 }
@@ -102,7 +105,6 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
                             showSnackBar(getString(R.string.no_album_photos_for_user))
                         albumPhotosListAdapter.submitList(it)
                         albumPhotosListAdapter.notifyDataSetChanged()
-
                     }
                 }
             }

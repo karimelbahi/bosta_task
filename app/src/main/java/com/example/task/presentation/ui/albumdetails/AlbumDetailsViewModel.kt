@@ -38,6 +38,7 @@ class AlbumDetailsViewModel @Inject constructor(
             usersUseCase.getAlbumPhotos(albumId).first()
                 .also {
                     _usersAlbums.postValue(it as Resource<List<AlbumPhoto>>)
+                    if (!it.data.isNullOrEmpty())
                     _photos.addAll(it.data as List<AlbumPhoto>)
                 }
         }

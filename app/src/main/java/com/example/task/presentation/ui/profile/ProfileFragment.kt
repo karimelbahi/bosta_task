@@ -17,6 +17,7 @@ import com.example.task.presentation.utils.invisible
 import com.example.task.presentation.utils.snack
 import com.example.task.presentation.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile), OnItemClickListener<Album> {
@@ -65,6 +66,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), OnItemClickListener
                 Status.ERROR -> {
                     binding.progressCircular.invisible()
                     users.msg?.let {
+                        if (it == getString(R.string.msg_network_error))
+                            no_internet_layout.visible()
                         showSnackBar(it)
                     }
                 }

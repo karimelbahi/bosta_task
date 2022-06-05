@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val resourcesResolver: ResourcesResolver,
     private val usersUseCase: UsersUseCase
 ) : ViewModel() {
 
