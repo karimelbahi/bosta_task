@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class AlbumPhotosViewModel @Inject constructor(
+class AlbumDetailsViewModel @Inject constructor(
     private val resourcesResolver: ResourcesResolver,
     private val usersUseCase: UsersUseCase
 ) : ViewModel() {
@@ -30,7 +30,7 @@ class AlbumPhotosViewModel @Inject constructor(
     private var _filteredPhotos = ArrayList<AlbumPhoto>()
 
     private val _emptyFilterMessage = MutableLiveData<String?>()
-    val emptyFilterMessage = _emptyFilterMessage as LiveData<String>
+    val emptyFilterMessage = _emptyFilterMessage as LiveData<*>
 
     fun getUserDetails(albumId: Int) {
         viewModelScope.launch(Dispatchers.IO) {

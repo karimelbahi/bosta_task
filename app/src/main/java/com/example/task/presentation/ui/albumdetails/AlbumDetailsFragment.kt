@@ -8,14 +8,14 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.task.R
 import com.example.task.databinding.FragmentAlbumDetailsBinding
 import com.example.task.domain.entity.AlbumPhoto
 import com.example.task.interfaces.OnItemClickListener
+import com.example.task.presentation.ui.profile.ProfileFragmentDirections
 import com.example.task.presentation.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.search_group.*
@@ -26,7 +26,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
 
 
     private val args: AlbumDetailsFragmentArgs by navArgs()
-    private val viewModel: AlbumPhotosViewModel by viewModels()
+    private val viewModel: AlbumDetailsViewModel by viewModels()
     private var _binding: FragmentAlbumDetailsBinding? = null
     private val binding get() = _binding!!
     private val albumPhotosListAdapter by lazy {
@@ -116,7 +116,11 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
     }
 
     override fun onItemClicked(item: AlbumPhoto) {
-
+        findNavController().navigate(
+            AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToZoomImageFragment(
+                item.title, item.url
+            )
+        )
     }
 
     private fun showSnackBar(message: String) {

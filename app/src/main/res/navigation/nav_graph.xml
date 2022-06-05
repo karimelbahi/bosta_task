@@ -40,6 +40,25 @@
             android:name="albumId"
             app:argType="integer"
             app:nullable="false" />
+        <action
+            android:id="@+id/action_albumDetailsFragment_to_zoomImageFragment"
+            app:destination="@id/zoomImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/zoomImageFragment"
+        android:name="com.example.task.presentation.ui.zoomimage.ZoomImageFragment"
+        android:label="ZoomImageFragment"
+        tools:layout="@layout/fragment_zoom_image">
+
+    <argument
+            android:name="albumTitle"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="albumUrl"
+            app:argType="string"
+            app:nullable="false" />
+
     </fragment>
 
 

@@ -43,6 +43,8 @@ object Versions {
     const val POWERMOCK = "1.7.4"
     const val MOCKITO_KOTLIN2 = "2.2.0"
     const val MOCKITO_INLINE = "2.23.0"
+    const val zoom = "2.3.0"
+
 }
 
 object BuildPlugins {
@@ -102,6 +104,8 @@ object Libs {
     const val activityKtx = "androidx.activity:activity-ktx:${Versions.ACTIVITY_KTX}"
 
     const val glide = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
+    const val zoomImg = "com.github.chrisbanes:PhotoView:${Versions.zoom}"
+    const val zoom = "com.github.chrisbanes:PhotoView:${Versions.zoom}"
 
 
 }
