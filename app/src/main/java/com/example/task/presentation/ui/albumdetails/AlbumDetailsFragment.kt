@@ -104,7 +104,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details),
                         if (it.isNullOrEmpty() && viewModel.emptyFilterMessage.value.isNullOrEmpty())
                             showSnackBar(getString(R.string.no_album_photos_for_user))
                         albumPhotosListAdapter.submitList(it)
-
+                        albumPhotosListAdapter.notifyDataSetChanged()
                     }
                 }
             }
