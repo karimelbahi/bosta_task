@@ -1,5 +1,6 @@
 package com.example.task.presentation.ui.zoomimage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import com.example.task.R
 import com.example.task.databinding.FragmentZoomImageBinding
 import com.example.task.presentation.utils.loadImage
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ZoomImageFragment : Fragment(R.layout.fragment_zoom_image) {
@@ -25,8 +27,26 @@ class ZoomImageFragment : Fragment(R.layout.fragment_zoom_image) {
 
 
     private fun setUpViews() {
-        binding.imageTitle.text=args.albumTitle
-        binding.imageView.loadImage(args.albumUrl,null,binding.progress)
+        binding.imageTitle.text = args.albumTitle
+        binding.imageView.loadImage(args.albumUrl, null, binding.progress)
+        binding.share.setOnClickListener {
+
+            try {
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                var shareMessage = getString(R.string.recommendation_msg)
+                shareMessage += args.albumUrl;
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "choose one"));
+            } catch (e: Exception) {
+
+            }
+        }
+
+        binding.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
 
     }
 
